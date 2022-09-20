@@ -17,10 +17,10 @@ const Form = () => {
       })
     }
     fetch("https://ehealthbackend-project.herokuapp.com/api/health/blogs")
-    .then(res=>res.json()).then(data=>console.log(data));
+    .then(res=>res.json()).then(data=>JSON.stringify(data));
     const handleSubmit=(event)=>{
       event.preventDefault()
-    console.log(formData)
+
   }
     return (
 
