@@ -10,6 +10,7 @@ import { nanoid } from "nanoid";
 function App() {
   const [dark, setDark] = React.useState("dark");
   const [nums, setNums] = React.useState(generateNums());
+  const [tens,setTens]=React.useState(false)
   function generateNums() {
     const numsArr = [];
     for (let i = 1; i <= 10; i++) {
@@ -41,6 +42,14 @@ function App() {
       })
     );
   };
+  React.useEffect(()=>{
+  const allHeld=nums.every(die=>die.isHeld)
+  const firstNum=nums[0].value
+  const allNums=nums.every(die=>die.value===firstNum)
+  if(allHeld & allNums){
+    setTens(true)
+  }
+  },[nums])
   const onChangeTheme = () => {
     let mode;
     if (dark === "dark") mode = "light";
@@ -83,7 +92,7 @@ function App() {
         </div>
         <Data theme={dark} />
         <div className="w-3/4 px-20 ">
-          <Nums dice={nums} onRoll={chooseDice} onRolling={rolls}/>
+          <Nums dice={nums} onRoll={chooseDice} onRolling={rolls} tenz={tens}/>
         </div>
       </div>
     </div>

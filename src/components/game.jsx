@@ -1,5 +1,6 @@
 import React from "react";
-const Nums = ({ dice, onRoll, onRolling }) => {
+import Confetti from 'react-confetti'
+const Nums = ({ dice, onRoll, onRolling,tenz }) => {
   const diceDisplay = dice.map((die) => (
     <div
       className={
@@ -15,13 +16,14 @@ const Nums = ({ dice, onRoll, onRolling }) => {
   ));
   return (
     <div className=" bg-gray-500 shadow-lg rounded py-3">
-      <div className="text-gray-900 text-medium mx-10 my-10 w-3/4 rounded-lg p-4 bg-gray-400">{dice.every((die) => die.isHeld) ? "you arleady win the game!" : "keep enjoying the game dear freind"}</div>
+      {tenz ?<Confetti/> : null}
+      <div className="text-gray-900 text-medium mx-10 my-10 w-3/4 rounded-lg p-4 bg-gray-400">{tenz? "you arleady win the game!" : "keep enjoying the game dear freind"}</div>
       <div className="grid grid-cols-5 gap-y-2gap-x-2">{diceDisplay}</div>
       <button
         className="bg-gray-700 font-bold text-white mx-20 w-2/4 rounded-lg py-2 hover:bg-slate-900 shodow-md flex items-center justify-center"
         onClick={onRolling}
       >
-        {dice.every((die) => die.isHeld) ? "New game" : "roll"}
+        {tenz? "New game" : "roll"}
       </button>
     </div>
   );
