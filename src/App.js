@@ -6,12 +6,12 @@ import Cards from "./components/cards";
 import Data from "./components/dataFormat";
 import Nums from "./components/game";
 import { nanoid } from "nanoid";
-import {Routes,Route} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   const [dark, setDark] = React.useState("dark");
   const [nums, setNums] = React.useState(generateNums());
-  const [tens,setTens]=React.useState(false)
+  const [tens, setTens] = React.useState(false);
   function generateNums() {
     const numsArr = [];
     for (let i = 1; i <= 10; i++) {
@@ -43,45 +43,49 @@ function App() {
       })
     );
   };
-  React.useEffect(()=>{
-  const allHeld=nums.every(die=>die.isHeld)
-  const firstNum=nums[0].value
-  const allNums=nums.every(die=>die.value===firstNum)
-  if(allHeld & allNums){
-    setTens(true)
-  }
-  },[nums])
+  React.useEffect(() => {
+    const allHeld = nums.every((die) => die.isHeld);
+    const firstNum = nums[0].value;
+    const allNums = nums.every((die) => die.value === firstNum);
+    if (allHeld & allNums) {
+      setTens(true);
+    }
+  }, [nums]);
   const onChangeTheme = () => {
     let mode;
     if (dark === "dark") mode = "light";
     else mode = "dark";
     setDark((prevdark) => (prevdark = mode));
   };
-  let component
-        component=<div className="flex md:flex-row ml-20 w-2/4 sm:flex-col items-center">
-        <Cards
-          image={require("./components/images/Capture1.PNG")}
-          dates="2022/2023"
-          avenue="kigali..."
-          theme={dark}
-        />
-        <Cards
-          image={require("./components/images/Capture2.PNG")}
-          dates="2022/2023"
-          avenue="butare..."
-          theme={dark}
-        />
-        <Cards
-          image={require("./components/images/Capture3.PNG")}
-          dates="2022/2023"
-          avenue="karaongi..."
-          theme={dark}
-        />
-      </div>
+  let component;
+  component = (
+    <div className="flex md:flex-row ml-20 w-2/4 sm:flex-col items-center">
+      <Cards
+        image={require("./components/images/Capture1.PNG")}
+        dates="2022/2023"
+        avenue="kigali..."
+        theme={dark}
+      />
+      <Cards
+        image={require("./components/images/Capture2.PNG")}
+        dates="2022/2023"
+        avenue="butare..."
+        theme={dark}
+      />
+      <Cards
+        image={require("./components/images/Capture3.PNG")}
+        dates="2022/2023"
+        avenue="karaongi..."
+        theme={dark}
+      />
+    </div>
+  );
 
-          let Game = <div className="w-3/4 px-20 ">
-          <Nums dice={nums} onRoll={chooseDice} onRolling={rolls} tenz={tens}/>
-        </div>
+  let Game = (
+    <div className="w-3/4 px-20 ">
+      <Nums dice={nums} onRoll={chooseDice} onRolling={rolls} tenz={tens} />
+    </div>
+  );
 
   return (
     <div className="bg-gray-800">
@@ -96,15 +100,12 @@ function App() {
             : "bg-gray-200 p-8 items-center ml-20 mr-20"
         }
       >
-
-    <Routes>
-     <Route path="/home" element={<Post theme={dark}/>}></Route>
-     <Route path="/contact" element={component}></Route>
-     <Route path="/teams" element={<Data theme={dark} />}></Route>
-     <Route path="/game" element={Game}></Route>
-    </Routes>
-
-
+        <Routes>
+          <Route path="/home" element={<Post theme={dark} />}></Route>
+          <Route path="/contact" element={component}></Route>
+          <Route path="/teams" element={<Data theme={dark} />}></Route>
+          <Route path="/game" element={Game}></Route>
+        </Routes>
       </div>
     </div>
   );
